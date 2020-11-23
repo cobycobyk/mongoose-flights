@@ -1,8 +1,33 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: darkgray;
 }
 
 a {
   color: #00B7FF;
+}
+header {
+  font-size: 3vmin;
+  padding: 1vmin;
+  background-color: #c2d21a;
+  color: white;
+  text-align: left;
+  letter-spacing: .2vmin;
+}
+
+h1 {
+  text-align: center;
+}
+main {
+  background-color: #f5b11f;
+}
+table {
+  margin: 0 auto;
+}
+tbody {
+  color: white;
+}
+p {
+  text-align: center;
 }

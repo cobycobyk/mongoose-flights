@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
 
 const flightSchema = new Schema ({
@@ -21,7 +20,8 @@ const flightSchema = new Schema ({
     departs: {
         type: Date,
         default: function() {
-            return new Date().getFullYear() + 1;
+            const today = new Date();
+            return today.setFullYear(today.getFullYear()+1);
         },
     },
 })
