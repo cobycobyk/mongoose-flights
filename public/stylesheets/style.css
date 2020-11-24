@@ -1,33 +1,128 @@
+* {
+  box-sizing: border-box;
+  font-family: Helvetica;
+  color: #424748;
+}
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: darkgray;
+  margin: 0;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 50px 1fr;
+  grid-template-areas: 
+    "nav"
+    "main"
 }
 
-a {
-  color: #00B7FF;
-}
-header {
-  font-size: 3vmin;
-  padding: 1vmin;
-  background-color: #c2d21a;
-  color: white;
-  text-align: left;
-  letter-spacing: .2vmin;
+body > nav {
+  grid-area: nav;
+  background-color: #457B9D;
+  display: flex;
+  justify-content: center;
+  padding: 0 20px 0 30px;
 }
 
-h1 {
-  text-align: center;
+nav > img {
+  object-fit: contain;
+  margin-right: auto;
 }
-main {
-  background-color: #f5b11f;
+
+body > main {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #A8DADC;
+  padding: 20px;
+  overflow-y: scroll;
 }
+
+nav > a {
+  color: #F1FAEE;
+  margin: 20px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+nav > a:hover:not(.active) {
+  background-color: #424748;
+}
+
+nav a.active {
+  color: #A8DADC;
+  cursor: default;
+}
+
+#new-form {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(auto, 22rem));
+}
+
+#new-form * {
+  grid-column: span 2;
+  font-size: 20px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+#new-form input[type="submit"] {
+  grid-column: span 2;
+  width: 10rem;
+  margin-left: auto;
+}
+
 table {
-  margin: 0 auto;
+  font-size: 20px;
 }
-tbody {
-  color: white;
+
+table thead th {
+  padding: 5px;
+  border-bottom: 2px solid #424748;
 }
-p {
+
+table td {
+  padding: 10px;
   text-align: center;
+}
+
+#list td:nth-child(2), #list td:nth-child(3){
+  min-width: 100px;
+}
+
+#list a {
+  border-radius: 4px;
+  background-color: #B8C0C2;
+  padding: 4px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+#list a:hover {
+  background-color: white;
+}
+
+#show-page {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 1rem;
+}
+
+#show-page div:nth-child(even) {
+  font-weight: bold;
+}
+
+#add-review-form {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 1rem;
+}
+
+#add-review-form input[type="submit"] {
+  width: 8rem;
+  grid-column: 2 / 3;
+  margin-bottom: 2rem;
+}
+.expired > td {
+  color: red;
 }

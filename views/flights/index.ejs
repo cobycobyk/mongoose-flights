@@ -1,39 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Flights</title>
-    <link rel="stylesheet" href="stylesheets/style.css">
-    <script defer src="javascripts/main.js"></script>
-</head>
-<body>
-    <header>
-        <a href="/flights">See All Flights</a>
-        <a href="/flights/new">Add Flight</a>
-    </header>
-    <main>
-        <h1>All the Flights!</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Airline</th>
-                    <th>Airport</th>
-                    <th>Flight Number</th>
-                    <th>Departs At</th>
-                </tr>
-            </thead>
-            <tbody>
-                <%flights.forEach(function(f) {%>
-                    <tr>
-                        <td><%= f.airline %></td>
-                        <td><%= f.airport %></td>
-                        <td><%= f.flightNo %></td>
-                        <td class="departs"><%= f.departs %></td>
-                    </tr>
-                    <% }); %>
-            </tbody>
-        </table>
-    </main>
-</body>
-</html>
+<%- include('../partials/header') %>
+<table id="list">
+    <thead>
+        <tr>
+            <th>Airline</th>
+            <th>Airport</th>
+            <th>Flight Number</th>
+            <th>Departs At</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%flights.forEach(function(f) {%>
+            <%const today = new Date()%>
+            <tr <%- Date.parse(f.departs) < new Date() ? 'class="expired"' : '' %>>
+                <td><%= f.airline %></td>
+                <td><%= f.airport %></td>
+                <td><%= f.flightNo %></td>
+                <td><%= f.departs %></td>
+                <td><a href="/flights/<%= f._id%>">DETAILS</a></td>
+            </tr>
+            <% }); %>
+    </tbody>
+</table>
+    
+<%- include('../partials/footer') %>

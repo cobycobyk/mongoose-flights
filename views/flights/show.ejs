@@ -1,0 +1,76 @@
+<%- include('../partials/header') %>
+<h2><%=flight.airline%> Flight <%= flight.flightNo%> from <%=flight.airport%></h2>
+<section id="show-page">
+    <div>Airline:</div>
+    <div><%=flight.airline%></div>
+    <div>Airport:</div>
+    <div><%=flight.airport%></div>
+    <div>Flight Number:</div>
+    <div><%=flight.flightNo%></div>
+    <div>Departs From:</div>
+    <div><%=flight.departs%></div>
+</section>
+<h3>Add Destination to Flight</h3>
+<form id="add-destination-form" method="POST" action="/flights/<%=flight._id%>/destinations">
+    <label>Destination</label>
+    <select name="airport">
+        <% airports.forEach(function(a) { %>
+            <option value="<%= a %>"><%= a %></option>
+        <% }) %>
+    </select>
+    <label>Arrival Date</label>
+    <input type="datetime-local" name="arrival">
+    <input type="submit" value="Add Destination">
+</form>
+<% if (flight.destinations.length) { %>
+    <h3>Destinations</h3>
+    <table>
+        <thead>
+          <tr>
+            <th>Airport</th>
+            <th>Arrival</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% flight.destinations.forEach(function(f) { %>
+            <tr>
+              <td><%= f.airport %></td>
+              <% if (f.arrival) {%>
+                <td><%= f.arrival %></td>
+                <% } else { %>
+                    <td>No Arrival Time Inserted</td>
+              <%}%>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    <% } else { %>
+      <h5>Please Input an Arrival</h5>
+    <% } %>
+<% if (ticket.destinations.length) { %>
+    <h3>Tickets</h3>
+    <table>
+        <thead>
+          <tr>
+            <th>Airport</th>
+            <th>Arrival</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% flight.destinations.forEach(function(f) { %>
+            <tr>
+              <td><%= f.airport %></td>
+              <% if (f.arrival) {%>
+                <td><%= f.arrival %></td>
+                <% } else { %>
+                    <td>No Arrival Time Inserted</td>
+              <%}%>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    <% } else { %>
+      <h5>Please Input an Arrival</h5>
+    <% } %>
+
+<%- include('../partials/footer') %>

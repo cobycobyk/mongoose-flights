@@ -3,6 +3,7 @@ module.exports = {
     index,
     new: newFlight,
     create,
+    show,
 };
 
 function index(req, res) {
@@ -10,14 +11,14 @@ function index(req, res) {
         flights.sort(function(a, b) {
             return a.departs - b.departs;
         });
-        res.render('flights/index', {flights});
+        res.render('flights/index', {flights, title: 'All The Flights!'});
     });
 };
 function newFlight(req, res) {
     const newFlight = new Flight();
     const dt = newFlight.departs;
     const departsDate = dt.toISOString().slice(0,16);
-    res.render('flights/new', {departsDate});
+    res.render('flights/new', {departsDate, title: 'Enter A New Flight'});
 }
 function create(req, res) {
     req.body.airline = req.body.airline.replace(/ *, */g, ',');
@@ -27,7 +28,19 @@ function create(req, res) {
       }
     const flight = new Flight(req.body);
     flight.save(function(err) {
-        if(err) return res.render('flights/new');
+        if(err) return res.redirect('/flights/new');
         res.redirect('/flights');
+    });
+};
+
+function show(req, res) {
+    const allAirports = ['AUS', 'DFW', 'DIA', 'LAX', 'SAN'];
+    Flight.findById(req.params.id, function(err, flight) {
+        flight.destinations.sort(function(a, b) {
+            return a.arrival - b.arrival;
+        });
+        const airports = allAirports.filter(a => !flight.destinations.some(d => d.airport === a));
+        console.log(airports)
+        res.render('flights/show', {title: 'Flight Details', flight, airports});
     });
 };
