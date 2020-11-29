@@ -42,7 +42,6 @@ function show(req, res) {
             flight.destinations.sort(function(a, b) {
                 return a.arrival - b.arrival;
             });
-            console.log(tickets)
             res.render('flights/show', {title: 'Flight Details', flight, airports, tickets});
         })
     });
