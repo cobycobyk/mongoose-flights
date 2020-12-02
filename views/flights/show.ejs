@@ -59,12 +59,13 @@
         <tbody>
           <% tickets.forEach(function(t) { %>
             <tr>
-              <% if (t.seat) {%>
-                <td><%= t.seat %></td>
-                <td>$<%= t.price %></td>
-                <% } else { %>
-                    <td>No Tickets Inserted</td>
-              <%}%>
+              <td><%= t.seat %></td>
+              <td>$<%= t.price %></td>
+              <td>
+                <form action="/tickets/<%= t.id %>?_method=DELETE" method="POST">
+                  <button class="delete-btn" type="submit">X</button>
+                </form>
+              </td>
             </tr>
           <% }); %>
         </tbody>

@@ -121,3 +121,6 @@ table td {
 .expired > td {
   color: red;
 }
+.delete-btn {
+  color: red;
+}
